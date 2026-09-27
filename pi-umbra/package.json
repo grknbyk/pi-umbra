@@ -1,0 +1,70 @@
+{
+  "name": "pi-umbra",
+  "version": "0.5.0",
+  "description": "Every small thing pi does not build in, in one install: seven themes and the chrome around them, the input bar, a shimmer through the working indicator, ask, copy-chat, preview, help, and parallel pi branches (read-only, or editing in their own git worktree) with a live agent tree.",
+  "keywords": [
+    "pi-package",
+    "pi-theme",
+    "pi-extension",
+    "meta",
+    "tui"
+  ],
+  "author": "grkn",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/grknbyk/pi-umbra.git",
+    "directory": "pi-umbra"
+  },
+  "homepage": "https://github.com/grknbyk/pi-umbra#readme",
+  "bugs": "https://github.com/grknbyk/pi-umbra/issues",
+  "type": "module",
+  "files": [
+    "README.md"
+  ],
+  "pi": {
+    "image": "https://raw.githubusercontent.com/grknbyk/pi-umbra/main/assets/carousel.webp",
+    "extensions": [
+      "./node_modules/pi-umbra-theme/extensions",
+      "./node_modules/pi-umbra-ask/extensions",
+      "./node_modules/pi-umbra-copy-chat/extensions",
+      "./node_modules/pi-umbra-help/extensions",
+      "./node_modules/pi-umbra-inputbar/extensions",
+      "./node_modules/pi-umbra-preview/extensions",
+      "./node_modules/pi-umbra-shimmer/extensions",
+      "./node_modules/pi-umbra-subagents/extensions/umbra-subagents.ts",
+      "./node_modules/pi-umbra-subagents/extensions/umbra-loop.ts"
+    ],
+    "skills": [
+      "./node_modules/pi-umbra-subagents/extensions/umbra-subagents/skills"
+    ],
+    "themes": [
+      "./node_modules/pi-umbra-theme/themes"
+    ]
+  },
+  "dependencies": {
+    "pi-umbra-theme": "0.3.0",
+    "pi-umbra-ask": "0.1.2",
+    "pi-umbra-copy-chat": "0.1.3",
+    "pi-umbra-help": "0.1.6",
+    "pi-umbra-inputbar": "0.1.5",
+    "pi-umbra-preview": "0.1.3",
+    "pi-umbra-shimmer": "0.1.6",
+    "pi-umbra-subagents": "0.2.0"
+  },
+  "bundledDependencies": [
+    "pi-umbra-theme",
+    "pi-umbra-ask",
+    "pi-umbra-copy-chat",
+    "pi-umbra-help",
+    "pi-umbra-inputbar",
+    "pi-umbra-preview",
+    "pi-umbra-shimmer",
+    "pi-umbra-subagents"
+  ],
+  "peerDependencies": {
+    "@earendil-works/pi-ai": "*",
+    "@earendil-works/pi-coding-agent": "*",
+    "@earendil-works/pi-tui": "*"
+  }
+}

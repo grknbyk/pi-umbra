@@ -1,0 +1,38 @@
+{
+  "name": "pi-umbra-ask",
+  "version": "0.1.2",
+  "description": "A tool the model can call to ask you a question mid-turn. Answers are stripped of control and bidi characters before any renderer sees them.",
+  "keywords": [
+    "pi-package",
+    "pi-extension",
+    "tool",
+    "prompt"
+  ],
+  "author": "grkn",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/grknbyk/pi-umbra.git",
+    "directory": "pi-umbra-ask"
+  },
+  "homepage": "https://github.com/grknbyk/pi-umbra/tree/main/pi-umbra-ask#readme",
+  "bugs": "https://github.com/grknbyk/pi-umbra/issues",
+  "type": "module",
+  "files": [
+    "extensions",
+    "lib",
+    "checks",
+    "README.md"
+  ],
+  "pi": {
+    "image": "https://raw.githubusercontent.com/grknbyk/pi-umbra/main/assets/ask.webp",
+    "extensions": [
+      "./extensions"
+    ]
+  },
+  "peerDependencies": {
+    "@earendil-works/pi-ai": "*",
+    "@earendil-works/pi-coding-agent": "*",
+    "@earendil-works/pi-tui": "*"
+  }
+}

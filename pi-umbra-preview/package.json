@@ -1,0 +1,36 @@
+{
+  "name": "pi-umbra-preview",
+  "version": "0.1.3",
+  "description": "Render a document with pandoc and open it in the browser, from inside pi.",
+  "keywords": [
+    "pi-package",
+    "pi",
+    "pi-extension",
+    "pandoc",
+    "preview",
+    "markdown"
+  ],
+  "author": "grkn",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/grknbyk/pi-umbra.git",
+    "directory": "pi-umbra-preview"
+  },
+  "homepage": "https://github.com/grknbyk/pi-umbra/tree/main/pi-umbra-preview#readme",
+  "bugs": "https://github.com/grknbyk/pi-umbra/issues",
+  "files": [
+    "extensions",
+    "checks",
+    "README.md",
+    "LICENSE"
+  ],
+  "pi": {
+    "extensions": [
+      "./extensions"
+    ]
+  },
+  "peerDependencies": {
+    "@earendil-works/pi-coding-agent": "*"
+  }
+}

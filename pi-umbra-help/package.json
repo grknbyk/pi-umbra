@@ -1,0 +1,37 @@
+{
+  "name": "pi-umbra-help",
+  "version": "0.1.6",
+  "description": "Two commands over the pi-umbra family: /umb-help lists what is installed and how to configure it, /umb-doctor reports the faults that would otherwise stay silent.",
+  "keywords": [
+    "pi-package",
+    "pi",
+    "pi-extension",
+    "help",
+    "doctor",
+    "diagnostics"
+  ],
+  "author": "grkn",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/grknbyk/pi-umbra.git",
+    "directory": "pi-umbra-help"
+  },
+  "homepage": "https://github.com/grknbyk/pi-umbra/tree/main/pi-umbra-help#readme",
+  "bugs": "https://github.com/grknbyk/pi-umbra/issues",
+  "files": [
+    "extensions",
+    "checks",
+    "lib",
+    "README.md",
+    "LICENSE"
+  ],
+  "pi": {
+    "extensions": [
+      "./extensions"
+    ]
+  },
+  "peerDependencies": {
+    "@earendil-works/pi-coding-agent": "*"
+  }
+}

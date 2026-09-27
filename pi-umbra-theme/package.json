@@ -1,0 +1,49 @@
+{
+  "name": "pi-umbra-theme",
+  "version": "0.3.0",
+  "description": "pi's look in one package: seven umbra themes and the terminal background they set, a status footer, a gutter beside model text, every tool call drawn as a card with rich diffs, and a working line that names the running tool.",
+  "keywords": [
+    "pi-package",
+    "pi",
+    "pi-extension",
+    "pi-theme",
+    "tui",
+    "theme",
+    "footer"
+  ],
+  "author": "grkn",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/grknbyk/pi-umbra.git",
+    "directory": "pi-umbra-theme"
+  },
+  "homepage": "https://github.com/grknbyk/pi-umbra/tree/main/pi-umbra-theme#readme",
+  "bugs": "https://github.com/grknbyk/pi-umbra/issues",
+  "type": "module",
+  "files": [
+    "extensions",
+    "checks",
+    "lib",
+    "themes",
+    "README.md",
+    "LICENSE"
+  ],
+  "pi": {
+    "image": "https://raw.githubusercontent.com/grknbyk/pi-umbra/main/assets/cards.webp",
+    "extensions": [
+      "./extensions"
+    ],
+    "themes": [
+      "./themes"
+    ]
+  },
+  "peerDependencies": {
+    "@earendil-works/pi-ai": "*",
+    "@earendil-works/pi-coding-agent": ">=1.0.0",
+    "@earendil-works/pi-tui": ">=1.0.0"
+  },
+  "dependencies": {
+    "@shikijs/cli": "^4.0.2"
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "name": "pi-umbra-inputbar",
+  "version": "0.1.5",
+  "description": "pi's input bar, rebuilt: a chevron prompt, the session name on the border, a colour you pick.",
+  "keywords": [
+    "pi-package",
+    "pi",
+    "pi-extension",
+    "tui",
+    "editor",
+    "prompt"
+  ],
+  "author": "grkn",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/grknbyk/pi-umbra.git",
+    "directory": "pi-umbra-inputbar"
+  },
+  "homepage": "https://github.com/grknbyk/pi-umbra/tree/main/pi-umbra-inputbar#readme",
+  "bugs": "https://github.com/grknbyk/pi-umbra/issues",
+  "files": [
+    "extensions",
+    "checks",
+    "README.md",
+    "LICENSE"
+  ],
+  "pi": {
+    "image": "https://raw.githubusercontent.com/grknbyk/pi-umbra/main/assets/inputbar.webp",
+    "extensions": [
+      "./extensions"
+    ]
+  },
+  "peerDependencies": {
+    "@earendil-works/pi-coding-agent": "*",
+    "@earendil-works/pi-tui": "*"
+  }
+}
