@@ -1,0 +1,43 @@
+{
+  "name": "pi-umbra-subagents",
+  "version": "0.1.2",
+  "description": "Parallel read-only pi branches with a live panel above the input box, the delegate skill that starts them, and /umb-loop, which resubmits a prompt on a count or a timer.",
+  "keywords": [
+    "pi-package",
+    "pi",
+    "pi-extension",
+    "pi-skill",
+    "subagents",
+    "parallel",
+    "loop"
+  ],
+  "author": "grkn",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/grknbyk/pi-umbra.git",
+    "directory": "pi-umbra-subagents"
+  },
+  "homepage": "https://github.com/grknbyk/pi-umbra/tree/main/pi-umbra-subagents#readme",
+  "bugs": "https://github.com/grknbyk/pi-umbra/issues",
+  "files": [
+    "extensions",
+    "README.md",
+    "LICENSE",
+    "patch.mjs"
+  ],
+  "pi": {
+    "extensions": [
+      "./extensions/umbra-subagents.ts",
+      "./extensions/umbra-loop.ts"
+    ],
+    "skills": [
+      "./extensions/umbra-subagents/skills"
+    ]
+  },
+  "peerDependencies": {
+    "@earendil-works/pi-ai": "*",
+    "@earendil-works/pi-coding-agent": "*",
+    "@earendil-works/pi-tui": "*"
+  }
+}

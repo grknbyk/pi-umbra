@@ -1,0 +1,37 @@
+{
+  "name": "pi-umbra-skill-matcher",
+  "version": "0.1.4",
+  "description": "Type /huh and reach skill:huh. pi lists every skill under its bare name, which is not the name that dispatches.",
+  "keywords": [
+    "pi-package",
+    "pi-extension",
+    "autocomplete",
+    "skills"
+  ],
+  "author": "grkn",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/grknbyk/pi-umbra.git",
+    "directory": "pi-umbra-skill-matcher"
+  },
+  "homepage": "https://github.com/grknbyk/pi-umbra/tree/main/pi-umbra-skill-matcher#readme",
+  "bugs": "https://github.com/grknbyk/pi-umbra/issues",
+  "type": "module",
+  "files": [
+    "extensions",
+    "checks",
+    "README.md",
+    "patch.mjs",
+    "LICENSE"
+  ],
+  "pi": {
+    "extensions": [
+      "./extensions"
+    ]
+  },
+  "peerDependencies": {
+    "@earendil-works/pi-coding-agent": "*",
+    "@earendil-works/pi-tui": "*"
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "name": "pi-umbra-rename",
+  "version": "0.1.3",
+  "description": "One command that renames a pi session and the terminal window title together, which pi keeps behind two separate APIs.",
+  "keywords": [
+    "pi-package",
+    "pi",
+    "pi-extension",
+    "session",
+    "rename",
+    "title"
+  ],
+  "author": "grkn",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/grknbyk/pi-umbra.git",
+    "directory": "pi-umbra-rename"
+  },
+  "homepage": "https://github.com/grknbyk/pi-umbra/tree/main/pi-umbra-rename#readme",
+  "bugs": "https://github.com/grknbyk/pi-umbra/issues",
+  "files": [
+    "extensions",
+    "checks",
+    "README.md",
+    "LICENSE"
+  ],
+  "pi": {
+    "extensions": [
+      "./extensions"
+    ]
+  },
+  "peerDependencies": {
+    "@earendil-works/pi-coding-agent": "*"
+  }
+}

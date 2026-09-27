@@ -1,0 +1,38 @@
+{
+  "name": "pi-umbra-shimmer",
+  "version": "0.1.5",
+  "description": "A wave of colour running through pi's working indicator, over both the spinner and the text. Needs the umbra bundle patches; without them it does nothing.",
+  "keywords": [
+    "pi-package",
+    "pi",
+    "pi-extension",
+    "tui",
+    "spinner",
+    "animation"
+  ],
+  "author": "grkn",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/grknbyk/pi-umbra.git",
+    "directory": "pi-umbra-shimmer"
+  },
+  "homepage": "https://github.com/grknbyk/pi-umbra/tree/main/pi-umbra-shimmer#readme",
+  "bugs": "https://github.com/grknbyk/pi-umbra/issues",
+  "files": [
+    "extensions",
+    "checks",
+    "README.md",
+    "LICENSE",
+    "patch.mjs"
+  ],
+  "pi": {
+    "image": "https://raw.githubusercontent.com/grknbyk/pi-umbra/main/assets/working.webp",
+    "extensions": [
+      "./extensions"
+    ]
+  },
+  "peerDependencies": {
+    "@earendil-works/pi-coding-agent": "*"
+  }
+}
