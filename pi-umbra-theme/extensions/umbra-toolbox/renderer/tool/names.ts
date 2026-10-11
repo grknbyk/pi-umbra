@@ -62,9 +62,10 @@ export type ToolCallSummary = {
 	payload?: string;
 };
 
+// posix first: win32 also calls "/home/x" absolute and would make the relative path "a\b".
 function pathApi(value: string) {
-	if (win32.isAbsolute(value)) return win32;
 	if (posix.isAbsolute(value)) return posix;
+	if (win32.isAbsolute(value)) return win32;
 	return undefined;
 }
 
