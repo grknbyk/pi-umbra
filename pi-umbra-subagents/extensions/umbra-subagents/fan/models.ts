@@ -9,7 +9,7 @@ import { fileURLToPath } from "node:url";
 // puts that extension back. Checking first costs one `--list-models` per session; finding out
 // afterwards cost a started run of failed branches, read back from pi's error text.
 
-export type FanSettings = { load: string[]; timeoutMs: number };
+export type FanSettings = { load: string[]; timeoutMs: number; tools: string };
 export type Offer = { from: "scoped" | "free" | "reachable"; models: string[] };
 
 export const RUN_SH = join(dirname(fileURLToPath(import.meta.url)), "..", "skills", "delegate", "run.sh");
@@ -20,17 +20,18 @@ const run = (command: string, args: string[], timeout: number) =>
 	);
 
 /** The environment alone: what a caller with no bash, and the check, get. */
-export const envSettings = (load = "", timeout = ""): FanSettings => ({
+export const envSettings = (load = "", timeout = "", tools = ""): FanSettings => ({
 	load: (process.env.FAN_LOAD ?? load).split(/\s+/).filter(Boolean),
 	timeoutMs: Number(process.env.FAN_TIMEOUT_MS) || Number(timeout) * 1000 || 300_000,
+	tools: process.env.FAN_TOOLS || tools || "read,grep,find,ls",
 });
 
-/** $LOAD and $DELEGATE_TIMEOUT through run.sh's own dconfig, so fan and the delegate skill
- *  read one set of files the same way. FAN_LOAD and FAN_TIMEOUT_MS win. */
+/** $LOAD, $DELEGATE_TIMEOUT and $DELEGATE_TOOLS through run.sh's own dconfig, so fan and the
+ *  delegate skill read one set of files the same way. FAN_LOAD, FAN_TIMEOUT_MS and FAN_TOOLS win. */
 export const fanSettings = async (): Promise<FanSettings> => {
-	const script = '. "$1"; dconfig; printf "%s\\n%s" "$LOAD" "$DELEGATE_TIMEOUT"';
-	const [load = "", timeout = ""] = (await run("bash", ["-c", script, "fan", RUN_SH], 5_000)).split("\n");
-	return envSettings(load, timeout);
+	const script = '. "$1"; dconfig; printf "%s\\n%s\\n%s" "$LOAD" "$DELEGATE_TIMEOUT" "$DELEGATE_TOOLS"';
+	const [load = "", timeout = "", tools = ""] = (await run("bash", ["-c", script, "fan", RUN_SH], 5_000)).split("\n");
+	return envSettings(load, timeout, tools);
 };
 
 // One listing per extension set. A failed listing is not kept, and forget() drops one after a

@@ -27,6 +27,7 @@ writeFileSync(
         'import { join } from "node:path";',
         "const task = process.argv[process.argv.length - 1];",
         'if (process.env.FAN_CHECK_ORDER) appendFileSync(process.env.FAN_CHECK_ORDER, `${task}\\n`);',
+        'if (process.env.FAN_CHECK_TOOLS) appendFileSync(process.env.FAN_CHECK_TOOLS, `${task} ${process.argv[process.argv.indexOf("--tools") + 1]}\\n`);',
         'if (task === "hang") setInterval(() => {}, 1000);',
         // A write branch's edits: two in its cwd, which must be the session's folder inside its
         // worktree, one binary, and one at the worktree's root, outside that folder.
@@ -200,6 +201,9 @@ writeFileSync(join(repo, ".git", "hooks", "post-commit"), `#!/bin/sh\ntouch '${r
 const session = join(repo, "newpkg");
 mkdirSync(session);
 
+// The read-only set comes from settings (FAN_TOOLS / $DELEGATE_TOOLS); a write branch keeps it.
+const toolsLog = join(root, "tools.log");
+process.env.FAN_CHECK_TOOLS = toolsLog;
 const writeDir = store.start(
     {
         name: "write",
@@ -212,6 +216,8 @@ const writeDir = store.start(
     },
     "stub/one",
     session,
+    undefined,
+    { load: [], timeoutMs: 4000, tools: "read,codemode,bash" },
 ) as string;
 const worktrees = join(repo, ".git", "fan-worktrees", basename(writeDir));
 assert.ok(existsSync(join(worktrees, "later-v1-lock")), "every write branch gets its worktree at start, under .git");
@@ -233,6 +239,12 @@ assert.equal(existsSync(join(repo, "hooked")), false, "no hook ran");
 assert.equal(existsSync(join(worktrees, "build-fix")), false, "a finished worktree is removed");
 assert.doesNotMatch(git("status", "--porcelain"), /pi-out|fan-worktrees/, "neither the run nor the worktrees show in git status");
 assert.equal(store.run()?.branches.find((branch) => branch.stem === "build-look")?.git, undefined, "a read-only branch has no git");
+delete process.env.FAN_CHECK_TOOLS;
+assert.deepEqual(
+    readFileSync(toolsLog, "utf8").trim().split("\n").sort(),
+    ["edit read,codemode,bash,edit,write", "read read,codemode,bash"],
+    "read-only branches get settings.tools; write branches add edit,write,bash once",
+);
 assert.equal(git("branch", "--list", "fan/*/later-*"), "", "the stopped one leaves no branch");
 assert.ok(reportOf(store.run()!).includes(mergeCommand(fix)), "the report carries the merge command");
 

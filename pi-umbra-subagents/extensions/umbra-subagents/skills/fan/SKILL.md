@@ -43,7 +43,9 @@ proposal: Given the Map results, write the design.
 
 ## Rules
 
-- Branches are read-only by default: `read`, `grep`, `find`, `ls`, nothing else.
+- Branches are read-only by default: `read`, `grep`, `find`, `ls`, plus whatever
+  `DELEGATE_TOOLS` in `~/.pi/agent/delegate.env` adds, such as `codemode` for an
+  MCP server. Never `edit`, `write` or `bash`.
   Work that edits files stays in this session, unless the user asked for
   parallel implementation; then use `[write]`.
 - A branch has an empty context. Repeating what you already know in the task

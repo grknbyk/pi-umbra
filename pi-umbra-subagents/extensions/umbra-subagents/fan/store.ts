@@ -45,10 +45,11 @@ const ASKING =
 // Read-only by default: a branch that can run bash can start branches of its own, and nothing
 // here caps the depth. Reference 3's `└` nesting needs exactly that, so it is a knob rather
 // than a constant — set FAN_TOOLS="read,grep,find,ls,bash" to allow it, and watch the panel.
-const READ_ONLY_TOOLS = process.env.FAN_TOOLS || "read,grep,find,ls";
+// The read-only set itself is FanSettings.tools: FAN_TOOLS, else $DELEGATE_TOOLS (models.ts).
 // A `[write]` branch edits and runs tests, so it gets the full set, and its own worktree to do
 // it in. bash reaches past the worktree, so the rules below are the fence; pi has no sandbox.
-const WRITE_TOOLS = "read,grep,find,ls,edit,write,bash";
+// It keeps whatever the read-only set adds (an MCP tool, codemode), deduped for --tools.
+const writeTools = (tools: string) => [...new Set(`${tools},edit,write,bash`.split(","))].join(",");
 const writeRules = (worktree: Worktree) =>
 	`You work in your own git worktree at ${worktree.path}, on branch ${worktree.branch}, and you may ` +
 	"edit files and run commands there. Never touch files outside it, never push, publish, deploy " +
@@ -107,6 +108,7 @@ type Launch = {
 	task: string;
 	timeoutMs: number;
 	load: string[];
+	tools: string;
 	worktree?: Worktree;
 };
 
@@ -273,7 +275,7 @@ const launch = (branch: Launch) => {
 		"-e",
 		BEACON,
 		"--tools",
-		branch.worktree ? WRITE_TOOLS : READ_ONLY_TOOLS,
+		branch.worktree ? writeTools(branch.tools) : branch.tools,
 		"--model",
 		branch.model,
 		"--append-system-prompt",
