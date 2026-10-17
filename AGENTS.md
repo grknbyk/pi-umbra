@@ -3,7 +3,9 @@
 ## What runs it
 
 - Each `pi-umbra-*` folder is one npm package; `pi-umbra/` is the meta package that bundles them.
-- The source of truth is `~/.pi/agent/extensions` (and `~/.agents/skills/{delegate,fan}`). Edit there,
+- The source of truth is `~/.pi/agent/extensions` (and `~/.agents/skills/{delegate,fan}`); an extension the
+  owner retired from their own pi (umbra-preview, umbra-image-viewer) lives in `~/.pi/agent/archive/extensions`
+  and still ships. Edit there,
   then `node sync.mjs` copies into the package folders; `node sync.mjs --check` must say every package
   matches. `sync.mjs` never writes READMEs, `package.json` or `patch.mjs`: edit those here.
 

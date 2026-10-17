@@ -1,6 +1,6 @@
 {
   "name": "pi-umbra-shimmer",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "A wave of colour running through pi's working indicator, over both the spinner and the text. Needs the umbra bundle patches; without them it does nothing.",
   "keywords": [
     "pi-package",

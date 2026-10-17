@@ -40,6 +40,11 @@ const PACKAGES = {
 };
 
 const checkOnly = process.argv.includes("--check");
+// The owner can retire an extension from their own pi into ~/.pi/agent/archive (umbra-preview and
+// umbra-image-viewer, 2026-10-17) while the package keeps shipping it, so an archived file still
+// counts as the source.
+const ARCHIVE = join(AGENT, "archive");
+const sourceOf = (rel) => (existsSync(join(AGENT, rel)) ? join(AGENT, rel) : join(ARCHIVE, rel));
 const moved = [];
 const drifted = [];
 
@@ -73,7 +78,7 @@ for (const [name, plan] of Object.entries(PACKAGES)) {
 	for (const stem of plan.extensions ?? []) {
 		const dir = join(AGENT, "extensions", stem);
 		if (!(existsSync(dir) && statSync(dir).isDirectory())) {
-			const from = join(AGENT, "extensions", `${stem}.ts`);
+			const from = sourceOf(join("extensions", `${stem}.ts`));
 			put(join(root, "extensions", `${stem}.ts`), readFileSync(from, "utf8"), `${name}/extensions/${stem}.ts`);
 			continue;
 		}
@@ -104,7 +109,7 @@ for (const [name, plan] of Object.entries(PACKAGES)) {
 	// layouts and must not move. Matching the whole quoted path covers `from "..."` and
 	// `await import("...")` alike: three of these checks reach for their subject with the latter.
 	for (const stem of plan.checks ?? []) {
-		const from = join(AGENT, "extensions", "checks", `${stem}.check.ts`);
+		const from = sourceOf(join("extensions", "checks", `${stem}.check.ts`));
 		// A check sits two levels under the agent root and one under the package root, so the
 		// shared lib is `../../lib` in one and `../lib` in the other. The extensions themselves
 		// are one level down in both layouts and need no such adjustment.

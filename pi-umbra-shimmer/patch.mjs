@@ -52,8 +52,12 @@ const PATCHES = [
 		// working status, so pi hands it the editor border - and the fallback below never runs.
 		// Standing that function down when a shimmer is installed is what lets the fallback through.
 		reason: "a shimmer outranks the editor border",
-		from: `let colorFn=isWorkingStatusEditor(this.editor)?text=>(this.editor.borderColor??theme.getThinkingBorderColor(this.session.thinkingLevel||"off"))(text):void 0;`,
-		to: `let colorFn=globalThis.__umbraShimmer?void 0:isWorkingStatusEditor(this.editor)?text=>(this.editor.borderColor??theme.getThinkingBorderColor(this.session.thinkingLevel||"off"))(text):void 0;`,
+		// pi 1.3 renamed isWorkingStatusEditor to isEmbeddedStatus and shares it with the compaction
+		// indicator, so the method name pins the working one.
+		variants: ["isEmbeddedStatus", "isWorkingStatusEditor"].map((name) => ({
+			from: `showWorkingStatusIndicator(){let colorFn=${name}(this.editor)?text=>(this.editor.borderColor??theme.getThinkingBorderColor(this.session.thinkingLevel||"off"))(text):void 0;`,
+			to: `showWorkingStatusIndicator(){let colorFn=globalThis.__umbraShimmer?void 0:${name}(this.editor)?text=>(this.editor.borderColor??theme.getThinkingBorderColor(this.session.thinkingLevel||"off"))(text):void 0;`,
+		})),
 	},
 	{
 		// Custom frames are rendered verbatim, which is what kept the braille glyph out of the
